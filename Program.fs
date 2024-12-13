@@ -4,6 +4,7 @@ open System.IO
 open System.Text.Json
 open System.Windows.Forms
 open System.Drawing
+open Connction 
 
 let filePath = "seatStates.json"
 
