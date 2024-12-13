@@ -1,4 +1,5 @@
-﻿open System
+﻿module Program
+open System
 open System.IO
 open System.Text.Json
 open System.Windows.Forms

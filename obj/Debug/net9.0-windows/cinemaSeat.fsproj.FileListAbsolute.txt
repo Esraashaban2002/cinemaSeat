@@ -56,3 +56,45 @@ D:\cinemaSeat-master\obj\Debug\net9.0-windows\refint\cinemaSeat.dll
 D:\cinemaSeat-master\obj\Debug\net9.0-windows\cinemaSeat.pdb
 D:\cinemaSeat-master\obj\Debug\net9.0-windows\cinemaSeat.genruntimeconfig.cache
 D:\cinemaSeat-master\obj\Debug\net9.0-windows\ref\cinemaSeat.dll
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.fsproj.AssemblyReference.cache
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.AssemblyInfoInputs.cache
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.AssemblyInfo.fs
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.fsproj.CoreCompileInputs.cache
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.sourcelink.json
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.dll
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\refint\cinemaSeat.dll
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.pdb
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\cinemaSeat.exe
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\cinemaSeat.deps.json
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\cinemaSeat.runtimeconfig.json
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\cinemaSeat.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\cinemaSeat.pdb
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\BouncyCastle.Cryptography.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\FSharp.Core.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\Google.Protobuf.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\K4os.Compression.LZ4.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\K4os.Compression.LZ4.Streams.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\K4os.Hash.xxHash.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\MySql.Data.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\ZstdSharp.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\cs\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\de\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\es\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\fr\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\it\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\ja\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\ko\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\pl\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\pt-BR\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\ru\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\tr\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\zh-Hans\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\zh-Hant\FSharp.Core.resources.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\runtimes\win-x64\native\comerr64.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\runtimes\win-x64\native\gssapi64.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\runtimes\win-x64\native\k5sprt64.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\runtimes\win-x64\native\krb5_64.dll
+E:\Desktop\Project pl3\cinemaSeat\bin\Debug\net9.0-windows\runtimes\win-x64\native\krbcc64.dll
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.fsproj.Up2Date
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\cinemaSeat.genruntimeconfig.cache
+E:\Desktop\Project pl3\cinemaSeat\obj\Debug\net9.0-windows\ref\cinemaSeat.dll
