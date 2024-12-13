@@ -1,0 +1,5 @@
+D:\fyear_Project\cinemaSeat\obj\Debug\net8.0-windows\cinemaSeat.fsproj.AssemblyReference.cache
+D:\fyear_Project\cinemaSeat\obj\Debug\net8.0-windows\cinemaSeat.AssemblyInfoInputs.cache
+D:\fyear_Project\cinemaSeat\obj\Debug\net8.0-windows\cinemaSeat.AssemblyInfo.fs
+D:\fyear_Project\cinemaSeat\obj\Debug\net8.0-windows\cinemaSeat.fsproj.CoreCompileInputs.cache
+D:\fyear_Project\cinemaSeat\obj\Debug\net8.0-windows\cinemaSeat.sourcelink.json
