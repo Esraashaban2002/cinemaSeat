@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Compile Include="Connction.fs" />
+    <Compile Include="BookingControler.fs" />
+    <Compile Include="Booking.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

@@ -1,10 +1,12 @@
 ﻿module Program
 open System
+open MySql.Data.MySqlClient
 open System.IO
 open System.Text.Json
 open System.Windows.Forms
 open System.Drawing
 open Connction 
+open Booking
 
 let filePath = "seatStates.json"
 
@@ -87,6 +89,7 @@ let bookingButton = new Button(Text = "Confirm Booking", AutoSize = true, Height
 bookingButton.BackColor <- ColorTranslator.FromHtml("#FFB38E")
 bookingButton.ForeColor <- Color.White
 bookingButton.Font <- new Font("sans", 20.0f)
+
 bookingButton.Click.Add(fun _ ->
     for control in seatPanel.Controls do
         match control with
@@ -99,6 +102,8 @@ bookingButton.Click.Add(fun _ ->
                     seatStates.[row, col] <- "booked"
                     updateSeatDisplay button row col
         | _ -> ()
+        
+    Booking.bookingTicketForm()
 )
 
 mainForm.Controls.Add(bookingButton)
