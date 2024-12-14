@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("cinemaSeat")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c5a50c751fcdbec23127f8c8d8708d8c7f36a21")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5f5f9ecdc3e39413f7c0dcd60708506deec6b49")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("cinemaSeat")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("cinemaSeat")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]

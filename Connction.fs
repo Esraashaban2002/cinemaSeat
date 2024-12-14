@@ -16,6 +16,8 @@ let createTables () =
         Status VARCHAR(50) NOT NULL
     );
 
+    CREATE UNIQUE INDEX idx_row_col ON Seats (Row_seat, Column_seat);
+
     CREATE TABLE IF NOT EXISTS Bookings (
         Id INT AUTO_INCREMENT PRIMARY KEY,
         SeatId INT NOT NULL,
