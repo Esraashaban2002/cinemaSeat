@@ -1,71 +1,47 @@
-﻿open System
-open System.IO
-open System.Text.Json
+﻿module Program
+open System
+open MySql.Data.MySqlClient
 open System.Windows.Forms
 open System.Drawing
+open Connction 
+open Booking
 
-let filePath = "seatStates.json"
 
-// Initialize Seat States
-let seatStates = Array2D.create 10 10 "available"
-
-// Save Seat States to a File
-let saveSeatStates () =
-    let seatList = 
-        [ for i in 0 .. Array2D.length1 seatStates - 1 -> 
-            [ for j in 0 .. Array2D.length2 seatStates - 1 -> seatStates.[i, j] ] ]
-    let json = JsonSerializer.Serialize(seatList)
-    File.WriteAllText(filePath, json)
-
-// Load Seat States from a File
-let loadSeatStates () =
-    if File.Exists(filePath) then
-        let json = File.ReadAllText(filePath)
-        let seatList = JsonSerializer.Deserialize<string list list>(json)
-        for i = 0 to seatList.Length - 1 do
-            for j = 0 to seatList.[i].Length - 1 do
-                seatStates.[i, j] <- seatList.[i].[j]
-
-// Update the button colors and text based on the seat states
-let updateSeatDisplay (button: Button) (row: int) (col: int) =
-    match seatStates.[row, col] with
-    | "available" -> button.BackColor <- ColorTranslator.FromHtml("#FF8E8F")
-    | "selected" -> button.BackColor <- Color.DarkRed
-    | "booked" -> button.BackColor <- Color.Green
-    | _ -> ()
-
-// Display the current seating chart in the console
-let displaySeats () =
-    for row in 0 .. 9 do
-        let rowStatus = 
-            [ for col in 0 .. 9 -> 
-                match seatStates.[row, col] with
-                | "available" -> "O"
-                | "selected" -> "S"
-                | "booked" -> "X"
-                | _ -> "?" ]
-            |> String.concat " "
-        printfn "Row %d: %s" (row + 1) rowStatus
-
-let isSeatAvailable (row: int) (col: int) =
-    if seatStates.[row, col] = "available" then true else false
+let checkSeatButton (conn: MySqlConnection) (button: Button) row col =
+    let checkSeatQuery = "SELECT Status FROM Seats WHERE Row_seat = @row AND Column_seat = @col"
+    use cmd = new MySqlCommand(checkSeatQuery, conn)
+    cmd.Parameters.AddWithValue("@row", row + 1) |> ignore
+    cmd.Parameters.AddWithValue("@col", col + 1) |> ignore
+    use reader = cmd.ExecuteReader()
+    if reader.Read() then
+        let status = reader.GetString(0)
+        reader.Close()
+        button.BackColor <- 
+            if status = "Available" then ColorTranslator.FromHtml("#FF8E8F")
+            else Color.Gray
 
 // Create Seat Buttons and Add Event Handlers
-let createSeatButton row col =
+let createSeatButton (conn: MySqlConnection) row col =
     let button = new Button(Text = sprintf "R%d-C%d" (row + 1) (col + 1), Width = 80, Height = 40)
-    updateSeatDisplay button row col
     button.Font <- new Font("sans", 12.0f)
-    button.ForeColor <- ColorTranslator.FromHtml("#fff")
-    button.Click.Add(fun _ ->
-       if isSeatAvailable row col then
-                seatStates.[row, col] <- "selected"
-                updateSeatDisplay button row col
-        elif seatStates.[row, col]="selected" then
-                seatStates.[row, col] <- "available"
-                updateSeatDisplay button row col
-        else
-            MessageBox.Show(sprintf "Seat R%d-C%d is already booked!" (row + 1) (col + 1), "Information")|> ignore
-    )
+    button.ForeColor <- Color.White
+
+    checkSeatButton conn button row col 
+    
+    // insert the seat into the database
+    // try
+    //     conn.Open()
+    //     let insertSeatQuery = "INSERT INTO Seats (Row_seat, Column_seat, Status) VALUES (@Row, @Column, @Status)"
+    //     use cmd = new MySqlCommand(insertSeatQuery, conn)
+    //     cmd.Parameters.AddWithValue("@Row", row + 1) |> ignore
+    //     cmd.Parameters.AddWithValue("@Column", col + 1) |> ignore
+    //     cmd.Parameters.AddWithValue("@Status", "Available") |> ignore
+    //     cmd.ExecuteNonQuery()
+        
+    //     MessageBox.Show(sprintf "Seat R%d-C%d successfully added to the database." (row + 1) (col + 1), "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    // with ex ->
+    //     MessageBox.Show(sprintf "Error adding seat: %s" ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    // conn.Close()
     button
 
 let mainForm = new Form(Text = "Cinema Seat Reservation", AutoSize = true, Height = 700)
@@ -75,28 +51,21 @@ mainForm.StartPosition <- FormStartPosition.CenterScreen
 let seatPanel = new TableLayoutPanel(AutoSize = true, RowCount = 10, ColumnCount = 10)
 seatPanel.CellBorderStyle <- TableLayoutPanelCellBorderStyle.Single
 
-loadSeatStates () // Load saved states before creating buttons
+let connectionString = Connction.connectionString
+use conn = new MySqlConnection(connectionString)
+conn.Open()
 
 for row in 0 .. 9 do
     for col in 0 .. 9 do
-        seatPanel.Controls.Add(createSeatButton row col)
+        seatPanel.Controls.Add(createSeatButton conn row col)
 
 let bookingButton = new Button(Text = "Confirm Booking", AutoSize = true, Height = 60)
 bookingButton.BackColor <- ColorTranslator.FromHtml("#FFB38E")
 bookingButton.ForeColor <- Color.White
 bookingButton.Font <- new Font("sans", 20.0f)
+
 bookingButton.Click.Add(fun _ ->
-    for control in seatPanel.Controls do
-        match control with
-        | :? Button as button ->
-            let seat = button.Text.Split([|'-'; 'R'; 'C'|], StringSplitOptions.RemoveEmptyEntries)
-            if seat.Length = 2 then
-                let row = int seat.[0] - 1
-                let col = int seat.[1] - 1
-                if seatStates.[row, col] = "selected" then
-                    seatStates.[row, col] <- "booked"
-                    updateSeatDisplay button row col
-        | _ -> ()
+    Booking.bookingTicketForm()
 )
 
 mainForm.Controls.Add(bookingButton)
@@ -108,8 +77,6 @@ mainForm.Controls.Add(seatPanel)
 mainForm.Resize.Add(fun _ ->
     seatPanel.Left <- (mainForm.ClientSize.Width - seatPanel.Width) / 2
 )
-
-mainForm.FormClosing.Add(fun _ -> saveSeatStates ())
 
 [<EntryPoint>]
 let main argv =
