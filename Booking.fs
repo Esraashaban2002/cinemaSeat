@@ -79,3 +79,25 @@ let bookingTicketForm (reservedSeats: string list) =
     form.Controls.Add(bookingButton)
 
     form.Show()
+
+    let availableSeatsForm () = 
+    let form = new Form(Text = "Cinema Seat Reservation",Size = Size(500 ,600), AutoScroll = true , BackColor = Color.White)
+    // Create Controls
+    let statusLabel = new Label(Location = Point(10, 10), AutoSize= true)
+    let listBox = new DataGridView(Location = Point(10, 40), AutoSize= true , AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill)
+
+    // Add columns to DataGridView
+    listBox.Columns.Add("Id", "Seat ID")
+    listBox.Columns.Add("RowSeat", "Row Seat")
+    listBox.Columns.Add("ColumnSeat", "Column Seat")
+    listBox.Columns.Add("Status", "Status")
+
+    let connectionString = Connction.connectionString
+    use conn = new MySqlConnection(connectionString)
+    conn.Open()
+
+    BookingControler.getAvailableSeats conn listBox statusLabel
+
+    form.Controls.Add(statusLabel)
+    form.Controls.Add(listBox)
+    form.Show()
