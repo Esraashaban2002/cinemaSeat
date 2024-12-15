@@ -17,7 +17,7 @@ let bookingTicket (conn: MySqlConnection) (nameTextBox: TextBox) (seatTextBox: T
        // Split the input and validate the format
         let seatParts = seatTextBox.Text.Split('-')
         if seatParts.Length <> 2 || not (seatParts.[0].StartsWith("R")) || not (seatParts.[1].StartsWith("C")) then
-            raise (Exception("Invalid seat format. Use Row-Column format (e.g., R1-C1)."))dotnet run
+            raise (Exception("Invalid seat format. Use Row-Column format (e.g., R1-C1)."))
 
 
         // Extract and convert row and column numbers
