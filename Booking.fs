@@ -80,7 +80,7 @@ let bookingTicketForm (reservedSeats: string list) =
 
     form.Show()
 
-    let availableSeatsForm () = 
+let availableSeatsForm () = 
     let form = new Form(Text = "Cinema Seat Reservation",Size = Size(500 ,600), AutoScroll = true , BackColor = Color.White)
     // Create Controls
     let statusLabel = new Label(Location = Point(10, 10), AutoSize= true)
