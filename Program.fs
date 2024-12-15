@@ -1,4 +1,4 @@
-﻿module Program
+module Program
 
 open System
 open MySql.Data.MySqlClient
@@ -97,6 +97,12 @@ bookingButton.BackColor <- ColorTranslator.FromHtml("#FFB38E")
 bookingButton.ForeColor <- Color.White
 bookingButton.Font <- new Font("sans", 20.0f)
 
+// Available button 
+let availableButton = new Button(Text = "Available Seat", AutoSize = true, Height = 60)
+availableButton.BackColor <- ColorTranslator.FromHtml("#FFB38E")
+availableButton.ForeColor <- Color.White
+availableButton.Font <- new Font("sans", 20.0f)
+
 bookingButton.Click.Add(fun _ -> 
     // Pass the list of reserved seats to the booking form
     if reservedSeats.Value.Length > 0 then
@@ -105,11 +111,21 @@ bookingButton.Click.Add(fun _ ->
         MessageBox.Show("No seats have been reserved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error) |> ignore
 )
 
+availableButton.Click.Add(fun _ -> 
+   Booking.availableSeatsForm()
+)
+
 mainForm.Controls.Add(bookingButton)
 mainForm.Resize.Add(fun _ -> 
-    bookingButton.Left <- (mainForm.ClientSize.Width - bookingButton.Width) / 2
+    bookingButton.Left <- 50
     bookingButton.Top <- mainForm.ClientSize.Height - bookingButton.Height - 20
 )
+mainForm.Controls.Add(availableButton)
+mainForm.Resize.Add(fun _ -> 
+    availableButton.Left <- 500
+    availableButton.Top <- mainForm.ClientSize.Height - bookingButton.Height - 20
+)
+
 mainForm.Controls.Add(seatPanel)
 mainForm.Resize.Add(fun _ -> 
     seatPanel.Left <- (mainForm.ClientSize.Width - seatPanel.Width) / 2
