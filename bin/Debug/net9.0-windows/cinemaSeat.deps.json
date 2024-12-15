@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "cinemaSeat/1.0.0": {
         "dependencies": {
-          "FSharp.Core": "9.0.100-beta.24466.6",
+          "FSharp.Core": "9.0.100",
           "MySql.Data": "9.1.0"
         },
         "runtime": {
@@ -23,11 +23,11 @@
           }
         }
       },
-      "FSharp.Core/9.0.100-beta.24466.6": {
+      "FSharp.Core/9.0.100": {
         "runtime": {
           "lib/netstandard2.1/FSharp.Core.dll": {
             "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.1.24.46606"
+            "fileVersion": "9.1.24.52202"
           }
         },
         "resources": {
@@ -262,12 +262,12 @@
       "path": "bouncycastle.cryptography/2.3.1",
       "hashPath": "bouncycastle.cryptography.2.3.1.nupkg.sha512"
     },
-    "FSharp.Core/9.0.100-beta.24466.6": {
+    "FSharp.Core/9.0.100": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-VdkJ1cUa55TK4T+ewwtZA3un369qbI8VtbWL6SoeenX/phA0xsMHNlTHtmACUOAD5Ul2AqippqM4DP859holFg==",
-      "path": "fsharp.core/9.0.100-beta.24466.6",
-      "hashPath": "fsharp.core.9.0.100-beta.24466.6.nupkg.sha512"
+      "sha512": "sha512-ye8yagHGsH08H2Twno5GRWkSbrMtxK/SWiHuPcF+3nODpW65/VJ8RO0aWxp8n9+KQbmahg90wAEL3TEXjF0r6A==",
+      "path": "fsharp.core/9.0.100",
+      "hashPath": "fsharp.core.9.0.100.nupkg.sha512"
     },
     "Google.Protobuf/3.26.1": {
       "type": "package",
