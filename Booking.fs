@@ -6,6 +6,7 @@ open System.Windows.Forms
 open System.Drawing
 open Connction
 
+// Booking Form
 let bookingTicketForm () =
     // Initialize the form with a white background color
     let form = new Form(Text = "Library Management System", AutoSize = true, BackColor = Color.White)
@@ -23,6 +24,7 @@ let bookingTicketForm () =
 
     let statusLabel = new Label(Location = Point(10, 120), Width = 400, Height = 30)
 
+    // Booking Button
     let bookingButton = new Button(Text = "Booking", AutoSize = true, Location = Point(10, 160), 
                                    BackColor = ColorTranslator.FromHtml("#FF8E8F"), 
                                    ForeColor = ColorTranslator.FromHtml("#fff"),

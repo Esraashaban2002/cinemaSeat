@@ -1,12 +1,12 @@
 ﻿module Program
-open System
+open System // Provides basic functions like arrays and event handlers.
 open MySql.Data.MySqlClient
-open System.Windows.Forms
-open System.Drawing
+open System.Windows.Forms // Provides GUI components like buttons, labels, and the form itself.
+open System.Drawing // Used for handling colors and graphics in the GUI.
 open Connction 
 open Booking
 
-
+// Seat Checking and Button Creation
 let checkSeatButton (conn: MySqlConnection) (button: Button) row col =
     let checkSeatQuery = "SELECT Status FROM Seats WHERE Row_seat = @row AND Column_seat = @col"
     use cmd = new MySqlCommand(checkSeatQuery, conn)
@@ -44,10 +44,12 @@ let createSeatButton (conn: MySqlConnection) row col =
     // conn.Close()
     button
 
+// Main Form Setup
 let mainForm = new Form(Text = "Cinema Seat Reservation", AutoSize = true, Height = 700)
 mainForm.BackColor <- Color.White
 mainForm.StartPosition <- FormStartPosition.CenterScreen
 
+// Seat Grid Layout
 let seatPanel = new TableLayoutPanel(AutoSize = true, RowCount = 10, ColumnCount = 10)
 seatPanel.CellBorderStyle <- TableLayoutPanelCellBorderStyle.Single
 
@@ -55,10 +57,12 @@ let connectionString = Connction.connectionString
 use conn = new MySqlConnection(connectionString)
 conn.Open()
 
+// Populating the Seat Grid
 for row in 0 .. 9 do
     for col in 0 .. 9 do
         seatPanel.Controls.Add(createSeatButton conn row col)
 
+// Booking Button
 let bookingButton = new Button(Text = "Confirm Booking", AutoSize = true, Height = 60)
 bookingButton.BackColor <- ColorTranslator.FromHtml("#FFB38E")
 bookingButton.ForeColor <- Color.White
@@ -78,6 +82,7 @@ mainForm.Resize.Add(fun _ ->
     seatPanel.Left <- (mainForm.ClientSize.Width - seatPanel.Width) / 2
 )
 
+// Main Application Loop
 [<EntryPoint>]
 let main argv =
     Application.Run(mainForm)

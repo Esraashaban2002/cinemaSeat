@@ -1,33 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Desktop\\Project pl3\\cinemaSeat\\cinemaSeat.fsproj": {}
+    "D:\\FCIH\\Fourth Year\\Programming-3\\Project\\cinemaSeat\\cinemaSeat.fsproj": {}
   },
   "projects": {
-    "E:\\Desktop\\Project pl3\\cinemaSeat\\cinemaSeat.fsproj": {
+    "D:\\FCIH\\Fourth Year\\Programming-3\\Project\\cinemaSeat\\cinemaSeat.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Desktop\\Project pl3\\cinemaSeat\\cinemaSeat.fsproj",
+        "projectUniqueName": "D:\\FCIH\\Fourth Year\\Programming-3\\Project\\cinemaSeat\\cinemaSeat.fsproj",
         "projectName": "cinemaSeat",
-        "projectPath": "E:\\Desktop\\Project pl3\\cinemaSeat\\cinemaSeat.fsproj",
-        "packagesPath": "C:\\Users\\a\\.nuget\\packages\\",
-        "outputPath": "E:\\Desktop\\Project pl3\\cinemaSeat\\obj\\",
+        "projectPath": "D:\\FCIH\\Fourth Year\\Programming-3\\Project\\cinemaSeat\\cinemaSeat.fsproj",
+        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
+        "outputPath": "D:\\FCIH\\Fourth Year\\Programming-3\\Project\\cinemaSeat\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\a\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.2.24474.11\\FSharp\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\9.0.101\\FSharp\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,7 +32,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -50,7 +43,7 @@
             "FSharp.Core": {
               "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
               "target": "Package",
-              "version": "[9.0.100-beta.24466.6, )",
+              "version": "[9.0.100, )",
               "generatePathProperty": true
             },
             "MySql.Data": {
@@ -78,7 +71,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100-rc.2.24474.11/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

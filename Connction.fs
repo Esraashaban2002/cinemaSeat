@@ -3,7 +3,7 @@ module Connction
 open System
 open MySql.Data.MySqlClient
 
-let connectionString = "Server=127.0.0.1; Database=cinema;User=root;Password=1234;"
+let connectionString = "Server=127.0.0.1; Database=cinema;User=root;Password=04311;"
 let createTables () =
     let connection = new MySqlConnection(connectionString)
     connection.Open()
