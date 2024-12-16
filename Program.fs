@@ -42,7 +42,6 @@ let createSeatButton (conn: MySqlConnection) row col =
     button.BackColor <- ColorTranslator.FromHtml("#FF8E8F")
     button.ForeColor <- Color.White
     checkSeatButton conn button row col
-
     // insert the seat into the database
     // try
     //     // conn.Open()

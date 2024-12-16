@@ -46,56 +46,59 @@ let reserveSeat (conn: MySqlConnection) (rowSeat: int) (columnSeat: int) (nameTe
     try
         // Start a transaction
         use transaction = conn.BeginTransaction()
+        if(nameTextBox.Text = "" || showtimeTextBox.Text = "") then
+            statusLabel.Text <- "All field requiered"
+            statusLabel.ForeColor <- Color.Red
+        else    
+            // Check seat availability
+            let checkSeatQuery = "SELECT Id, Status FROM Seats WHERE Row_seat = @RowSeat AND Column_seat = @ColumnSeat"
+            let checkAvailability rowSeat columnSeat =
+                use cmd = new MySqlCommand(checkSeatQuery, conn, transaction)
+                cmd.Parameters.AddWithValue("@RowSeat", rowSeat) |> ignore
+                cmd.Parameters.AddWithValue("@ColumnSeat", columnSeat) |> ignore
+                use reader = cmd.ExecuteReader()
+                if reader.Read() then
+                    let seatId = reader.GetInt32(0)
+                    let status = reader.GetString(1)
+                    reader.Close()
+                    if status = "Available" then 
+                        Some seatId 
+                    else None
+                else
+                    reader.Close()
+                    None
 
-        // Check seat availability
-        let checkSeatQuery = "SELECT Id, Status FROM Seats WHERE Row_seat = @RowSeat AND Column_seat = @ColumnSeat"
-        let checkAvailability rowSeat columnSeat =
-            use cmd = new MySqlCommand(checkSeatQuery, conn, transaction)
-            cmd.Parameters.AddWithValue("@RowSeat", rowSeat) |> ignore
-            cmd.Parameters.AddWithValue("@ColumnSeat", columnSeat) |> ignore
-            use reader = cmd.ExecuteReader()
-            if reader.Read() then
-                let seatId = reader.GetInt32(0)
-                let status = reader.GetString(1)
-                reader.Close()
-                if status = "Available" then 
-                    Some seatId 
-                else None
-            else
-                reader.Close()
-                None
+            match checkAvailability rowSeat columnSeat with
+            | None -> raise (Exception("Selected seat is not available."))
+            | Some seatId ->
+                // Insert booking into the Bookings table
+                let bookingQuery = "INSERT INTO Bookings (SeatId, ShowTime, CustomerName) VALUES (@SeatId, @ShowTime, @CustomerName)"
+                use bookingCmd = new MySqlCommand(bookingQuery, conn, transaction)
+                bookingCmd.Parameters.AddWithValue("@SeatId", seatId) |> ignore
+                bookingCmd.Parameters.AddWithValue("@ShowTime", showtimeTextBox.Text) |> ignore
+                bookingCmd.Parameters.AddWithValue("@CustomerName", nameTextBox.Text) |> ignore
+                bookingCmd.ExecuteNonQuery() |> ignore
+                let bookingId = int bookingCmd.LastInsertedId
 
-        match checkAvailability rowSeat columnSeat with
-        | None -> raise (Exception("Selected seat is not available."))
-        | Some seatId ->
-            // Insert booking into the Bookings table
-            let bookingQuery = "INSERT INTO Bookings (SeatId, ShowTime, CustomerName) VALUES (@SeatId, @ShowTime, @CustomerName)"
-            use bookingCmd = new MySqlCommand(bookingQuery, conn, transaction)
-            bookingCmd.Parameters.AddWithValue("@SeatId", seatId) |> ignore
-            bookingCmd.Parameters.AddWithValue("@ShowTime", showtimeTextBox.Text) |> ignore
-            bookingCmd.Parameters.AddWithValue("@CustomerName", nameTextBox.Text) |> ignore
-            bookingCmd.ExecuteNonQuery() |> ignore
-            let bookingId = int bookingCmd.LastInsertedId
+                // Generate and insert ticket into the Tickets table
+                let ticketId = sprintf "TICKET-%d-%d" bookingId DateTime.UtcNow.Ticks
+                let ticketQuery = "INSERT INTO Tickets (TicketId, BookingId, SeatId, ShowTime, CustomerName) VALUES (@TicketId, @BookingId, @SeatId, @ShowTime, @CustomerName)"
+                use ticketCmd = new MySqlCommand(ticketQuery, conn, transaction)
+                ticketCmd.Parameters.AddWithValue("@TicketId", ticketId) |> ignore
+                ticketCmd.Parameters.AddWithValue("@BookingId", bookingId) |> ignore
+                ticketCmd.Parameters.AddWithValue("@SeatId", seatId) |> ignore
+                ticketCmd.Parameters.AddWithValue("@ShowTime", showtimeTextBox.Text) |> ignore
+                ticketCmd.Parameters.AddWithValue("@CustomerName", nameTextBox.Text) |> ignore
+                ticketCmd.ExecuteNonQuery() |> ignore
 
-            // Generate and insert ticket into the Tickets table
-            let ticketId = sprintf "TICKET-%d-%d" bookingId DateTime.UtcNow.Ticks
-            let ticketQuery = "INSERT INTO Tickets (TicketId, BookingId, SeatId, ShowTime, CustomerName) VALUES (@TicketId, @BookingId, @SeatId, @ShowTime, @CustomerName)"
-            use ticketCmd = new MySqlCommand(ticketQuery, conn, transaction)
-            ticketCmd.Parameters.AddWithValue("@TicketId", ticketId) |> ignore
-            ticketCmd.Parameters.AddWithValue("@BookingId", bookingId) |> ignore
-            ticketCmd.Parameters.AddWithValue("@SeatId", seatId) |> ignore
-            ticketCmd.Parameters.AddWithValue("@ShowTime", showtimeTextBox.Text) |> ignore
-            ticketCmd.Parameters.AddWithValue("@CustomerName", nameTextBox.Text) |> ignore
-            ticketCmd.ExecuteNonQuery() |> ignore
+                // Update seat status
+                let status = "Reserved"
+                updateSeatChart conn seatId status statusLabel
 
-            // Update seat status
-            let status = "Reserved"
-            updateSeatChart conn seatId status statusLabel
-
-            // Commit transaction
-            transaction.Commit()
-            statusLabel.Text <- sprintf "Booking successful! Ticket ID: %s" ticketId
-            statusLabel.ForeColor <- Color.Green
+                // Commit transaction
+                transaction.Commit()
+                statusLabel.Text <- sprintf "Booking successful! Ticket ID: %s" ticketId
+                statusLabel.ForeColor <- Color.Green
 
     with ex ->
         statusLabel.Text <- sprintf "Error: %s" ex.Message
